@@ -17,7 +17,7 @@ use App\Http\Controllers\HomeController;
 Route::get('/', function () {
     return view('index');
 });
-
+Route::get('/imageList',[HomeController::class, 'imageList']);
 Route::post('/image',[HomeController::class, 'storeImage']);
 Route::post('/video',[HomeController::class, 'storeVideo']);
 Route::post('/email',[HomeController::class, 'storeEmail']);

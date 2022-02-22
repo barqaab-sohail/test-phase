@@ -13,6 +13,12 @@ use DB;
 
 class HomeController extends Controller
 {
+    
+    public function imageList(){
+        $images = Image::all();
+        return response()->json($images);
+    }
+
     public function storeImage(ImageStore $request){
 
     	DB::transaction(function () use ($request) {  

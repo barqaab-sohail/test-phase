@@ -277,12 +277,28 @@
         //   }
         // });
 
+
+    function getImages(){
+        $.ajax({
+            url: "{{url('imageList')}}",
+            type: 'get',
+            dataType: 'html',
+            async: false,
+            success: function(data) {
+                
+            } 
+        });
+    }
+
+     
+
         $('#uploadImage').on('submit', function(event){
           event.preventDefault();
           var url="{{url('/image')}}";
           $('.fa-spinner').show();  
             submitFormAjax(this, url);
         }); //end submit
+        
 
         $('#uploadVideo').on('submit', function(event){
           event.preventDefault();
@@ -301,11 +317,11 @@
         //ajax function
         function submitFormAjax(form, url, reset=0){
             
-            $.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
+          $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
             var data = new FormData(form)
 
            // ajax request

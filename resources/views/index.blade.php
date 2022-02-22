@@ -24,9 +24,7 @@
     <link rel="stylesheet" href="css/animate.min.css" type="text/css">
     <!-- =============== Custom CSS =============== -->
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <!-- =============== Owl Carousel Assets =============== -->
-    <link href="owl-carousel/owl.carousel.css" rel="stylesheet">
-    <link href="owl-carousel/owl.theme.css" rel="stylesheet">
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -110,6 +108,18 @@
                   </p>
                   <p>These scientist-magicians, the first color photographers, are hardly alone in pushing the boundaries of one of the world’s newest art forms. The history of photography has always been a history of people – artists and inventors who steered the field into the modern era.
                   </p>
+                  <p>So, below, you’ll find a brief introduction to some of photography’s most important names. Their discoveries, creations, ideas, and photographs shape our own pictures to this day, subtly or not. Although this is just a brief bird’s-eye view, these nonetheless are people you should know before you step into the technical side of photography:
+                  </p>
+                  <h2>What Is the Bare Minimum Gear Needed for Photography?</h2>
+                  <h3>Camera</h3>
+                  <p>If you buy a dedicated camera (rather than a phone), pick one with interchangeable lenses so that you can try out different types of photography more easily. Read reviews, but don’t obsess over them, because everything available today is pretty much equally good as its competition. Find a nice deal and move on.
+                  </p>
+                  <h3>Lenses</h3>
+                  <p>This is where it counts. For everyday photography, start with a standard zoom lens like a 24-70mm or 18-55mm. For portrait photography, pick a prime lens (one that doesn’t zoom) at 35mm, 50mm, or 85mm. For sports, go with a telephoto lens. For macro photography, get a dedicated macro lens. And so on. Lenses matter more than any other piece of equipment because they determine what photos you can take in the first place.
+                  </p>
+                  <h3>Post-processing software</h3>
+                  <p>One way or another, you need to edit your photos. It’s ok to start with software already on your computer, or software that comes with your camera. But in the long run, a dedicated program will do a better job. Adobe sells Lightroom and Photoshop as a bundle for $10/month, or you can buy standalone software from another company if you prefer; there are tons of options. Whatever you pick, stick with it for a while, and you’ll learn it quite well.
+                  </p>
 
                   </div>     
             </div>
@@ -121,42 +131,36 @@
 	<!-- =============== container =============== -->
     <div class="container">
      <span class="angle2"></span>
-    <span class="angle"></span>
-     <div class="row">
+      <span class="angle"></span>
+     
+      <div class="row">
 
-       <div class="col-xs-12 col-sm-12 col-md-12 wow bounceIn animated headding" data-wow-delay=".5s">
+        <div class="col-xs-12 col-sm-12 col-md-12 wow bounceIn animated headding" data-wow-delay=".5s">
+          
           <h2>Upload <span>Image</span></h2>
-            <form id= "uploadImage" method="post" enctype="multipart/form-data" action="">
-        @csrf
-          <div class="form-group">
-            <table class="table">
-              <tr>
-                <td width="40%" align="right"><label>Select File for Upload</label></td>
-                  <td width="30">
-                  <input type="file" name="select_file" />
-                  </td>
-                  <td width="30%" align="left">
-                  <input type="submit" name="uploadImage" class="btn btn-success" value="Upload Image">
-                  </td>
-              </tr>
-              <tr>
-                  <td width="40%" align="right"></td>
-                  <td width="30"><span class="text-muted">.jpg, .png Files Only</span></td>
-                  <td width="30%" align="left"></td>
-              </tr>
-            </table>
-          </div>
-      </form>
-       </div>
-
-      </div>
-
-     
-         
-     
+            <br>
+            <form id= "uploadImage" enctype="multipart/form-data">
+            @csrf
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-3">
+                     <input type="file"  name="image" id="image" required class="form-control clear">
+                     <span>File Type Only jpg and png</span>
+                  </div>
+                  <div class="col-md-3">
+                    <button type="submit" class="btn btn-success btn-prevent-multiple-submits"><i class="fa fa-spinner fa-spin" style="font-size:18px"></i>Save Image</button> 
+                  </div>
+                  <div class="col-md-3">
+                  </div>
+                </div>
+              </div>
+            </form>
+        </div>
       </div>
     </div>
-    </div>   
+ 
 	<!-- =============== container end =============== -->	
     </section>
     <!-- =============== upload_video =============== -->
@@ -170,31 +174,29 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12 wow zoomIn animated headding" data-wow-delay=".1s">
                <h2>Upload <span>Video</span></h2>
-               <form id= "fromImportSalary" method="post" enctype="multipart/form-data" action="">
-        @csrf
-          <div class="form-group">
-            <table class="table">
-              <tr>
-                <td width="40%" align="right"><label>Select File for Upload</label></td>
-                  <td width="30">
-                  <input type="file" name="select_file" />
-                  </td>
-                  <td width="30%" align="left">
-                  <input type="submit" name="upload" class="btn btn-success" value="Upload">
-                  </td>
-              </tr>
-              <tr>
-                  <td width="40%" align="right"></td>
-                  <td width="30"><span class="text-muted">.xls, .xslx Files Only</span></td>
-                  <td width="30%" align="left"></td>
-              </tr>
-            </table>
-          </div>
-      </form>
+                <form id= "uploadVideo" enctype="multipart/form-data">
+                @csrf
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-3">
+                      </div>
+                      <div class="col-md-3">
+                         <input type="file"  name="video" id="video" required class="form-control clear">
+                         <span>File Type Only mp4</span>
+                      </div>
+                      <div class="col-md-3">
+                        <button type="submit" class="btn btn-success btn-prevent-multiple-submits"><i class="fa fa-spinner fa-spin" style="font-size:18px"></i>Save Video</button> 
+                      </div>
+                      <div class="col-md-3">
+                      </div>
+                    </div>
+                  </div>
+                </form>
+               
            </div>
         </div>
         </div>    <!-- =============== container end =============== -->  
-        </section>
+    </section>
     <!-- =============== Contact =============== -->
     <section id="contact">
 	<!-- =============== container =============== -->
@@ -211,20 +213,21 @@
 
 				<div class="col-xs-12 wow bounceIn animated" data-wow-delay=".1s">
 
-					<form>
+					<form id= "email" enctype="multipart/form-data">
+          @csrf
 						<div class="ajax-hidden">
 							<div class="form-group wow fadeInUp animated">
 								<label for="c_name" class="sr-only">Name</label>
-								<input type="text" placeholder="Name" name="c_name" class="form-control" id="c_name">
+								<input type="text" placeholder="Name" name="name" class="form-control clear" id="c_name" required>
 							</div>
 
 							<div data-wow-delay=".1s" class="form-group wow fadeInUp animated">
 								<label for="c_email" class="sr-only">Email</label>
-								<input type="email" placeholder="E-mail" name="c_email" class="form-control" id="c_email">
+								<input type="email" placeholder="E-mail" name="email" class="form-control clear" id="c_email" required>
 							</div>
 
 							<div data-wow-delay=".2s" class="form-group wow fadeInUp animated">
-								<textarea placeholder="Message" rows="7" name="c_message" id="c_message" class="form-control"></textarea>
+								<textarea placeholder="Message" rows="7" name="message" id="c_message" class="form-control clear" required></textarea>
 							</div>
 
 							<button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit">Send Message</button>
@@ -251,6 +254,8 @@
 	</footer>
     <!-- =============== jQuery =============== -->
     <script src="js/jquery.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.validate.js"></script>
     <!-- =============== Bootstrap Core JavaScript =============== -->
     <script src="js/bootstrap.min.js"></script>
     <!-- =============== Plugin JavaScript =============== -->
@@ -259,18 +264,87 @@
     <script src="js/wow.min.js"></script>
     <!-- =============== Custom Theme JavaScript =============== -->
     <script src="js/creative.js"></script>
-    <!-- =============== owl carousel =============== -->
-    <script src="owl-carousel/owl.carousel.js"></script>
+   
     <script>
-        $(document).ready(function () {
-            $("#owl-demo").owlCarousel({
-                autoPlay: 3000,
-                items: 3,
-                itemsDesktop: [1199, 3],
-                itemsDesktopSmall: [979, 3]
-            });
+      $(document).ready(function () {
+        $('.fa-spinner').hide();
 
-        });
+        // $("#uploadImage").validate({  
+        //   submitHandler:function (form){
+        //     var url = "";
+        //     $('.fa-spinner').show();
+        //     submitFormAjax(this, url);
+        //   }
+        // });
+
+        $('#uploadImage').on('submit', function(event){
+          event.preventDefault();
+          var url="{{url('/image')}}";
+          $('.fa-spinner').show();  
+            submitFormAjax(this, url);
+        }); //end submit
+
+        $('#uploadVideo').on('submit', function(event){
+          event.preventDefault();
+          var url="{{url('/video')}}";
+          $('.fa-spinner').show();
+            submitFormAjax(this, url);
+        }); //end submit
+
+        $('#email').on('submit', function(event){
+          event.preventDefault();
+          var url="{{url('/email')}}";
+          $('.fa-spinner').show();
+            submitFormAjax(this, url);
+        }); //end submit
+
+        //ajax function
+        function submitFormAjax(form, url, reset=0){
+            
+            $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+            var data = new FormData(form)
+
+           // ajax request
+            $.ajax({
+               url:url,
+               method:"POST",
+               data:data,
+               //dataType:'JSON',
+               contentType: false,
+               cache: false,
+               processData: false,
+               success:function(data)
+                   {
+                    alert(data.message);
+                    $('.clear').val('');
+                    $('.fa-spinner').hide();
+                   },
+                error: function (jqXHR, textStatus, errorThrown) {
+                        
+                        var test = jqXHR.responseJSON // this object have two more objects one is errors and other is message.
+                        
+                        var errorMassage = '';
+
+                        //now saperate only errors object values from test object and store in variable errorMassage;
+                        $.each(test.errors, function (key, value){
+                          errorMassage += value + ', ';
+                        });
+                         
+                         alert(errorMassage);
+                          
+                        $('.fa-spinner').hide();
+                                      
+                    }//end error
+          }); //end ajax
+        }
+      
+
+
+      });
     </script>
 </body>
 </html>

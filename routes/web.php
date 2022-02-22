@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+
+Route::post('/image',[HomeController::class, 'storeImage']);
+Route::post('/video',[HomeController::class, 'storeVideo']);
+Route::post('/email',[HomeController::class, 'storeEmail']);

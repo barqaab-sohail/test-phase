@@ -15,8 +15,14 @@ class HomeController extends Controller
 {
     
     public function imageList(){
-        $images = Image::all();
-        return response()->json($images);
+        
+       $images = Image::get();
+       return response()->json($images);
+    }
+
+    public function videoList(){
+       $videos = Video::get();
+       return response()->json($videos);
     }
 
     public function storeImage(ImageStore $request){
@@ -69,14 +75,12 @@ class HomeController extends Controller
             $input = $request->all();
             Email::create($input);
 
-            \Mail::send('mail', array(
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-            'message' => $request->get('message'),
-		        ), function($message) use ($request){
-		            $message->from($request->email);
-		            $message->to('sohail.afzal@barqaab.com', 'Admin')->subject('Send from Contact Us Form');
-		        });
+            $data = array('name'=>$request->name, 'email'=>$request->email,'c_message'=>$request->message);
+              \Mail::send(['text'=>'mail'], $data, function($message)  use ($request) {
+                 $message->to(env('MAIL_FROM_ADDRESS','hrms@barqaab.pk'), 'VU Test Phase')->subject
+                    ('Laravel Basic Testing Mail');
+                 $message->from($request->email, $request->name);
+              });
         }); // end transcation
     	
     	return response()->json(['status'=> 'OK', 'message' => "We have received your message and would like to thank you for writing to us"]);

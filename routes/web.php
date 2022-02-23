@@ -19,5 +19,6 @@ Route::get('/', function () {
 });
 Route::get('/imageList',[HomeController::class, 'imageList']);
 Route::post('/image',[HomeController::class, 'storeImage']);
+Route::get('/videoList',[HomeController::class, 'videoList']);
 Route::post('/video',[HomeController::class, 'storeVideo']);
 Route::post('/email',[HomeController::class, 'storeEmail']);

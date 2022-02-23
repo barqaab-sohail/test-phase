@@ -129,7 +129,9 @@
     <!-- =============== how it works =============== -->
     <section id="upload_image" class="parallax">
 	<!-- =============== container =============== -->
+   
     <div class="container">
+
      <span class="angle2"></span>
       <span class="angle"></span>
      
@@ -159,8 +161,9 @@
             </form>
         </div>
       </div>
+     <div id="imageList"></div>
     </div>
- 
+  
 	<!-- =============== container end =============== -->	
     </section>
     <!-- =============== upload_video =============== -->
@@ -195,6 +198,7 @@
                
            </div>
         </div>
+        <div id="videoList"></div>
         </div>    <!-- =============== container end =============== -->  
     </section>
     <!-- =============== Contact =============== -->
@@ -230,13 +234,14 @@
 								<textarea placeholder="Message" rows="7" name="message" id="c_message" class="form-control clear" required></textarea>
 							</div>
 
-							<button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit">Send Message</button>
+              <button type="submit" class="btn btn-success btn-prevent-multiple-submits"><i class="fa fa-spinner fa-spin" style="font-size:18px"></i>Send Message</button>
 						</div>
 						<div class="ajax-response"></div>
 					</form>
 
 				</div>
-              
+          
+
                     
 			</div>
 		</div><!-- =============== container end =============== -->
@@ -264,103 +269,132 @@
     <script src="js/wow.min.js"></script>
     <!-- =============== Custom Theme JavaScript =============== -->
     <script src="js/creative.js"></script>
+    <script src="js/EZView.js"></script>
+
    
-    <script>
-      $(document).ready(function () {
-        $('.fa-spinner').hide();
+<script>
+  $(document).ready(function () {
+    $('.fa-spinner').hide();
 
-        // $("#uploadImage").validate({  
-        //   submitHandler:function (form){
-        //     var url = "";
-        //     $('.fa-spinner').show();
-        //     submitFormAjax(this, url);
-        //   }
-        // });
-
-
+    getImages();
+    getVideos();
+    
     function getImages(){
         $.ajax({
             url: "{{url('imageList')}}",
             type: 'get',
-            dataType: 'html',
+            dataType: 'json',
             async: false,
             success: function(data) {
-                
-            } 
+                $("#imageList" ).text('');
+                $.each(data, function(key, value) {
+                  var name = value.name;
+                  var image = "{{asset('storage/:id')}}";
+                  image = image.replace(':id',name)
+                  $("#imageList" ).append( '<img id="ViewIMG'+key+'" src="'+image+'" alt="user" class="profile-pic" width="200" height="200"/>' ); 
+                });
+            },
+        });
+    }
+
+    function getVideos(){
+        $.ajax({
+            url: "{{url('videoList')}}",
+            type: 'get',
+            dataType: 'json',
+            async: false,
+            success: function(data) {
+                $("#videoList" ).text('');
+                $.each(data, function(key, value) {
+                  var name = value.name;
+                  var video = "{{asset('storage/:id')}}";
+                  video = video.replace(':id',name)
+                  $("#videoList" ).append('<video width="320" height="240" controls><source src="'+video+'" type="video/mp4"></video>'); 
+                });
+            },
         });
     }
 
      
-
-        $('#uploadImage').on('submit', function(event){
-          event.preventDefault();
-          var url="{{url('/image')}}";
-          $('.fa-spinner').show();  
-            submitFormAjax(this, url);
-        }); //end submit
+    $('#uploadImage').on('submit', function(event){
+      event.preventDefault();
+      var url="{{url('/image')}}";
+      $('.fa-spinner').show();  
+        submitFormAjax(this, url);
+          setTimeout(function(){
+            getImages();
+          }, 2000);
+    }); //end submit
         
 
-        $('#uploadVideo').on('submit', function(event){
-          event.preventDefault();
-          var url="{{url('/video')}}";
-          $('.fa-spinner').show();
-            submitFormAjax(this, url);
-        }); //end submit
+    $('#uploadVideo').on('submit', function(event){
+      event.preventDefault();
+      var url="{{url('/video')}}";
+      $('.fa-spinner').show();
+        submitFormAjax(this, url);
+        setTimeout(function(){
+            getVideos();
+        }, 2000);
+    }); //end submit
 
-        $('#email').on('submit', function(event){
-          event.preventDefault();
-          var url="{{url('/email')}}";
-          $('.fa-spinner').show();
-            submitFormAjax(this, url);
-        }); //end submit
+    $('#email').on('submit', function(event){
+      event.preventDefault();
+      var url="{{url('/email')}}";
+      $('.fa-spinner').show();
+        submitFormAjax(this, url);
+    }); //end submit
 
-        //ajax function
-        function submitFormAjax(form, url, reset=0){
-            
-          $.ajaxSetup({
-            headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-          });
-            var data = new FormData(form)
-
-           // ajax request
-            $.ajax({
-               url:url,
-               method:"POST",
-               data:data,
-               //dataType:'JSON',
-               contentType: false,
-               cache: false,
-               processData: false,
-               success:function(data)
-                   {
-                    alert(data.message);
-                    $('.clear').val('');
-                    $('.fa-spinner').hide();
-                   },
-                error: function (jqXHR, textStatus, errorThrown) {
-                        
-                        var test = jqXHR.responseJSON // this object have two more objects one is errors and other is message.
-                        
-                        var errorMassage = '';
-
-                        //now saperate only errors object values from test object and store in variable errorMassage;
-                        $.each(test.errors, function (key, value){
-                          errorMassage += value + ', ';
-                        });
-                         
-                         alert(errorMassage);
-                          
-                        $('.fa-spinner').hide();
-                                      
-                    }//end error
-          }); //end ajax
+    //ajax function
+    function submitFormAjax(form, url, callback){
+        
+      $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
+      });
+        var data = new FormData(form)
+
+       // ajax request
+        $.ajax({
+           url:url,
+           method:"POST",
+           data:data,
+           //dataType:'JSON',
+           contentType: false,
+           cache: false,
+           processData: false,
+           success:function(data)
+               {
+                alert(data.message);
+                $('.clear').val('');
+                $('.fa-spinner').hide();
+               },
+            error: function (jqXHR, textStatus, errorThrown) {
+                    
+                    var test = jqXHR.responseJSON // this object have two more objects one is errors and other is message.
+                    
+                    var errorMassage = '';
+
+                    //now saperate only errors object values from test object and store in variable errorMassage;
+                    $.each(test.errors, function (key, value){
+                      errorMassage += value + ', ';
+                    });
+                     
+                     alert(errorMassage);
+                      
+                    $('.fa-spinner').hide();
+                                  
+                }//end error
+      }); //end ajax
+      
+      if (typeof callback === 'function') { 
+        callback(); 
+      }
+    }
       
 
 
-      });
-    </script>
+});
+</script>
 </body>
 </html>

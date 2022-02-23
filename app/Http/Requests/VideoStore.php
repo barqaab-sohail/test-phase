@@ -24,7 +24,7 @@ class VideoStore extends FormRequest
     public function rules()
     {
         return [
-            'video' => 'required|file|max:3000|mimes:mp4',
+            'video' => 'required|file|max:40000|mimes:mp4',
         ];
     }
 }

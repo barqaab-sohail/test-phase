@@ -1,7 +1,8 @@
-<h2>Hello</h2> <br><br>
-You have got an email from : {{ $name }} <br><br>
-User details: <br><br>
-Name: {{ $name }} <br>
-Email: {{ $email }} <br>
-Message: {{ $message }} <br><br>
+Hello
+You have got an email from : {{ $name }} 
+User details: 
+Name: {{ $name }}
+Email: {{$email}}
+Message: {{$c_message}}
+
 Thanks
